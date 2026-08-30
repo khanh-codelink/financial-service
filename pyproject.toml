@@ -1,0 +1,48 @@
+[project]
+name = "financial-service"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "khanh-codelink", email = "khanh.nguyen@codelink.io" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "alembic>=1.19.1",
+    "fastapi[standard]>=0.141.1",
+    "greenlet>=3.5.5",
+    "httpx>=0.28.1",
+    "pwdlib[argon2]>=0.3.1",
+    "pydantic>=2.13.4",
+    "pyjwt>=2.13.0",
+    "requests>=2.34.2",
+    "sqlalchemy>=2.0.52",
+]
+
+[project.scripts]
+financial-service = "financial_service:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"] # pycodestyle, pyflakes, isort, bugbear, pyupgrade
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_no_return = false
+warn_unused_ignores = false
+exclude = [".*/site-packages/.*"]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.1",
+    "ruff>=0.16.3",
+]
