@@ -12,6 +12,7 @@ default_db: AsyncSession = Depends(get_db)
 
 @router.post("", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def create_user(payload: UserCreate, db: AsyncSession = default_db) -> UserModel:
+    """Endpoint to create a new user."""
     
     user = UserModel(email=payload.email, hashed_password=hash_password(payload.password))
     db.add(user)
@@ -21,7 +22,7 @@ async def create_user(payload: UserCreate, db: AsyncSession = default_db) -> Use
 
 @router.get("/{user_id}", response_model=UserResponse)
 async def get_user(user_id: int, db: AsyncSession = default_db) -> UserModel:
-    # user = await db.get(UserModel, user_id)
+    """Endpoint to retrieve a user by their ID."""
 
     stmt = await db.execute(
         select(UserModel).where(UserModel.id == user_id)

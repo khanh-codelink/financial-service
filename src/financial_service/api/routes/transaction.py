@@ -17,6 +17,11 @@ async def create_transaction(
   current_user: UserModel = Depends(get_current_user),
   db: AsyncSession = Depends(get_db)
 ) -> TransactionResponse:
+    """
+    Endpoint to create a new financial transaction.
+
+    The transaction will be associated with the currently authenticated user and their account.
+    """
     repository = TransactionRepository(db)
     accountRepository = AccountRepository(db)
     service = TransactionService(repository, accountRepository)

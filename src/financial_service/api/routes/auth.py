@@ -13,6 +13,7 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 async def login(form_data: OAuth2PasswordRequestForm = Depends(),
                 db: AsyncSession = Depends(get_db)
               ) -> dict[str, str]:
+    """Endpoint to authenticate a user and provide an access token."""
     stmt = select(UserModel).where(UserModel.email == form_data.username)
     user = (await db.execute(stmt)).scalar_one_or_none()
 
