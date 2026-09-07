@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -63,7 +65,7 @@ async def update_account(account_id: int,
 
 @router.put("/{account_id}/top-up", response_model=AccountResponse)
 async def top_up_account(account_id: int,
-                         amount: float,
+                         amount: Decimal,
                          current_user = Depends(get_current_user),
                          db: AsyncSession = Depends(get_db)) -> AccountResponse:
     """

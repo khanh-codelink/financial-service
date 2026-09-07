@@ -17,7 +17,7 @@ class TransactionService:
         if not account:
             raise HTTPException(status_code=404, detail="Account not found or does not belong to the current user")
 
-        if payload.type == "DEBIT" and account.balance < payload.amount:
+        if payload.type == "debit" and account.balance < payload.amount:
             raise HTTPException(status_code=400, detail="Insufficient funds")
 
         payload.account_id = account.id
