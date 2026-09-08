@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 from financial_service.models.user_model import UserModel
 from tests.conftest import create_account
-
+pytestmark = pytest.mark.integration
 @pytest.mark.asyncio
 async def test_unauthenticated_transaction_fail(client: AsyncClient) -> None:
     response = await client.post("/transactions", json={

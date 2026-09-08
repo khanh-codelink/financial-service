@@ -3,6 +3,8 @@ from httpx import AsyncClient
 from financial_service.models.user_model import UserModel
 from financial_service.models.account_model import AccountModel
 
+pytestmark = pytest.mark.integration
+
 @pytest.mark.asyncio
 async def test_create_account_with_user_a(client: AsyncClient, user_a: UserModel, auth_header_a: dict[str, str]) -> None:
     response = await client.post("/accounts", json={"user_id": user_a.id, "balance": 100.0}, headers=auth_header_a)

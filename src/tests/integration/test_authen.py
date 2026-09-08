@@ -2,6 +2,8 @@ import pytest
 from httpx import AsyncClient
 from financial_service.models.user_model import UserModel
 
+pytestmark = pytest.mark.integration
+
 @pytest.mark.asyncio
 async def test_login_with_user_a(client: AsyncClient, user_a: UserModel) -> None:
     response = await client.post("/auth/login", data={"username": "user_a@example.com", "password": "passwordForUserA"})
