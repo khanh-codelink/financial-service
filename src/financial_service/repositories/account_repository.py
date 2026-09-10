@@ -24,3 +24,8 @@ class AccountRepository:
         await self.db.commit()
         await self.db.refresh(account)
         return account
+
+    async def get_accounts_by_user_id(self, user_id: int) -> list[AccountModel]:
+        stmt = select(AccountModel).where(AccountModel.user_id == user_id)
+        result = await self.db.execute(stmt)
+        return result.scalars().all()
