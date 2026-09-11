@@ -3,6 +3,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from financial_service.middleware import LoggingMiddleware
 
 from financial_service.database.database import init_db
 from financial_service.api.router import router as api_router
@@ -19,6 +20,7 @@ app = FastAPI(
     description="This API allows users to perform and manage financial transactions.",
     version="1.0.0", lifespan=lifespan)
 app.include_router(api_router)
+app.add_middleware(LoggingMiddleware)
 
 
 # For testing the API connectivity
