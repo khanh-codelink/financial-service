@@ -9,8 +9,10 @@ from financial_service.utils.security import ALGORITHM, SECRET_KEY
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
-async def get_current_user(token: str = Depends(oauth2_scheme), 
-                           db: AsyncSession = Depends(get_db)) -> UserModel:
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), 
+    db: AsyncSession = Depends(get_db)
+) -> UserModel:
     credentials_exception = HTTPException(
         status_code=401,
         detail="User not authenticated",
@@ -19,8 +21,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme),
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("user_id")
-        if user_id is None:
-            print("User ID not found in token payload")
+        if user_id is None:                                     # If user_id is 'str', then the if statement should empty types. Or change the type of user_id to Optional[str] and check for None.
+            print("User ID not found in token payload")         # Should use logging instead of print in production
             raise credentials_exception
     except jwt.PyJWTError:
         print("Failed to decode JWT token")

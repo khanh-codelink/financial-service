@@ -3,7 +3,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from financial_service.models.account_model import AccountModel
 
-
+# Correct use for database operations in the repository class for better separation of concerns and maintainability.
+# Add logging for better debugging and monitoring of database operations.
 class AccountRepository:
     def __init__(self, db: AsyncSession) -> None:
         self.db = db

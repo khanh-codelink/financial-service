@@ -35,6 +35,7 @@ class TransactionRepository:
                 .join(AccountModel)
                 .where(AccountModel.id == params.account_id))
 
+        # Alternative: use graphqlalchemy to build the query dynamically based on the provided filter parameters.
         conditions = []
         if params.start_date:
             conditions.append(TransactionModel.created_at >= params.start_date)
@@ -47,6 +48,7 @@ class TransactionRepository:
         if params.max_amount:
             conditions.append(TransactionModel.amount <= params.max_amount)
 
+        # When a graphqlalchemy query is built, it can be executed with the database session to retrieve the filtered transactions.
         if conditions:
             stmt = stmt.where(*conditions)
 

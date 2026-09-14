@@ -5,6 +5,10 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 from financial_service.models.transaction_model import TransactionType
 
+##################
+# The schemas here are for request and response validation in the API layer. They should not be included in the same file.
+##################
+
 class TransactionAccountResponse(BaseModel):
     id: int
     account_id: int
@@ -29,6 +33,9 @@ class AccountResponse(AccountCreate):
 class UserBase(BaseModel):
     email: EmailStr
 
+##################
+# These schemas are for database models and should be placed in a separate file, e.g., financial_service/schemas.py.
+##################
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=128)
     pass

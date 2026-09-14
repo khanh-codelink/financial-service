@@ -8,6 +8,9 @@ from financial_service.middleware import LoggingMiddleware
 from financial_service.database.database import init_db
 from financial_service.api.router import router as api_router
 
+# TODO: Missing config.py and pydantic settings for configuration management. 
+# Consider adding a config.py file to manage environment variables and application settings.
+# see ./config.py
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
