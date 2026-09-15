@@ -4,6 +4,9 @@ import time
 import httpx
 import requests
 
+# Benchmarking is a goodway to compare the performance of blocking and asynchronous requests.
+# Additional: Add more test on the error handling and edge cases to ensure the robustness of the benchmarking code.
+
 URL = "http://localhost:8000/delayed_ping"
 URLS = [URL] * 5
 

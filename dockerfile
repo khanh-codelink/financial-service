@@ -1,5 +1,9 @@
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+
+# TODO: Add .dockerignore to ignore files that are not needed in the image.
+# Add stdout and stderr to the console without buffering.
+ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 RUN --mount=type=cache,target=/root/.cache/uv \

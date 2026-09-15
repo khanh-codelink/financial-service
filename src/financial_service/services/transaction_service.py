@@ -7,6 +7,7 @@ from financial_service.repositories.transaction_repository import TransactionRep
 from financial_service.schemas import TransactionCreate, TransactionFilterParams
 
 
+# Add try except for error handling and logging for better debugging and monitoring of the transaction creation process.
 class TransactionService:
     def __init__(self, repository: TransactionRepository, accountRepository: AccountRepository):
         self.repository = repository

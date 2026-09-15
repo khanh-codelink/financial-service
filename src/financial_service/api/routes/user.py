@@ -39,5 +39,6 @@ async def get_user(user_id: int, db: AsyncSession = default_db) -> UserResponse:
 
     repository = UserRepository(db)
     service = UserService(repository)
-
+    # For GET request, we should return 404 if the user is not found, and 200 if the user is found. 
+    # The service layer should handle the logic of retrieving the user and raising an exception if not found.
     return await service.get_user(user_id)

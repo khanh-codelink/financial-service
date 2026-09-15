@@ -14,7 +14,9 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(),
                 db: AsyncSession = Depends(get_db)
               ) -> dict[str, str]:
     """Endpoint to authenticate a user and provide an access token."""
+    # Should have a DB operation class for specific query. E,g: AccountTable.get_user_by_email(email)
     stmt = select(UserModel).where(UserModel.email == form_data.username)
+    # This can be included in the DB operation class as well as the executor.
     user = (await db.execute(stmt)).scalar_one_or_none()
 
     if not user or not verify_password(form_data.password, user.hashed_password):
